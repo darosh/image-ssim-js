@@ -33,6 +33,11 @@
 			font-weight: 300;
 		}
 
+		h3 {
+			margin-bottom: 15px;
+			line-height: 1;
+		}
+
 		.right {
 			float: right;
 			margin-right: 20px;
@@ -68,6 +73,14 @@
 
 		.clear {
 			clear: both;
+		}
+
+		.info {
+			color: rgba(0, 0, 0, .48);
+		}
+
+		.info b {
+			color: rgba(0, 0, 0, .87);
 		}
 
 		.fnc {
@@ -122,17 +135,18 @@
 	width = height = 340;
 
 	var imagePairs = [
+		['./images/flower.jpg', './images/flower-contrast.jpg', 8, true, 'Contrast'],
+		['./images/flower.jpg', './images/flower-blur.jpg', 8, true, 'Blur'],
+		['./images/flower.jpg', './images/flower-desaturated.jpg', 8, true, 'Desaturated'],
+		['./images/flower.jpg', './images/flower-desaturated.jpg', 8, false, 'Desaturated'],
+		['./images/flower.jpg', './images/flower-noise.jpg', 8, true, 'Noise'],
+		['./images/flower.jpg', './images/flower-jpg.jpg', 8, true, 'JPG'],
+
 		['./images/palette-a.png', './images/palette-b.png', 8, true],
-		['./images/palette-a.png', './images/palette-b.png', 11, true],
-		['./images/palette-b.png', './images/palette-b-cubism.jpg', 11, true],
-		['./images/palette-b.png', './images/palette-b-cubism.jpg', 11, false],
 		['./images/palette-a.png', './images/wheel-pixelized.png', 8, true],
 		['./images/wheel.png', './images/wheel.png', 8, true],
-		['./images/wheel-pixelized.png', './images/wheel-pixelized-morf.png', 11, true],
-		['./images/wheel-pixelized.png', './images/wheel-pixelized-morf.png', 11, false],
 		['./images/wheel.png', './images/wheel-pixelized.png', 8, true],
-		['./images/wheel.png', './images/wheel-pixelized.png', 11, true],
-		['./images/wheel.png', './images/wheel-pixelized.png', 31, true]
+		['./images/wheel.png', './images/wheel-pixelized.png', 32, true]
 	];
 
 	window.onload = function () {
@@ -147,7 +161,7 @@
 		initDrop();
 	};
 
-	function loadImage(path, done) {
+	function loadImage(path, index, done) {
 		var img = new Image();
 		img.onload = function () {
 			var canvas = document.createElement('canvas');
@@ -156,7 +170,7 @@
 			var ctx = canvas.getContext('2d');
 			ctx.drawImage(img, 0, 0, width, canvas.height);
 			var id = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			done({width: canvas.width, height: canvas.height, data: id.data, channels: 4, canvas: canvas});
+			done({width: canvas.width, height: canvas.height, data: id.data, channels: 4, canvas: canvas}, index);
 		};
 		img.src = path;
 	}
@@ -164,19 +178,27 @@
 	function loadImagePair(pair, done) {
 		var images = [];
 
-		function loaded(img) {
-			images.push(img);
+		function loaded(img, index) {
+			images[index] = img;
 
-			if (images.length === 2) {
+			if (images[0] && images[1]) {
 				done(images);
 			}
 		}
 
-		loadImage(pair[0], loaded);
-		loadImage(pair[1], loaded);
+		loadImage(pair[0], 0, loaded);
+		loadImage(pair[1], 1, loaded);
 	}
 
 	function processImagePair(pair, prepend) {
+		var element = document.createElement('div');
+
+		if (prepend) {
+			root.insertBefore(element, root.children[1]);
+		} else {
+			root.appendChild(element);
+		}
+
 		loadImagePair(pair, function (images) {
 			var log = {};
 
@@ -184,25 +206,29 @@
 			log.luminance = pair[3];
 			var start = new Date().getTime();
 			log.ssim = SSIM.compare(images[0], images[1], pair[2], 0.01, 0.03, pair[3]);
+			log.ssim = Math.round(log.ssim * 1000) / 1000;
 			log.ellapsed = new Date().getTime() - start + 'ms';
 
 			// log.size = images[0].width + 'x' + images[0].height;
 
-			var info = document.createElement('pre');
-			info.textContent = JSON.stringify(log, null, 4);
-
-			var element = document.createElement('div');
-
-			if (prepend) {
-				root.insertBefore(element, root.children[1]);
-			} else {
-				root.appendChild(element);
-			}
+			var info = document.createElement('span');
+			info.className = 'info';
+			info.innerHTML = 'Window size: ' + log.windowSize + '<br>' +
+					'Luminance: ' + log.luminance + '<br>' +
+					'Elapsed time: ' + log.ellapsed + '<br>' +
+					'SSIM: <b>' + log.ssim + '</b>';
 
 			element.className = 'block';
 
 			element.appendChild(images[0].canvas);
 			element.appendChild(images[1].canvas);
+
+			if(pair[4]) {
+				var header = document.createElement('h3');
+				header.textContent = pair[4];
+				element.appendChild(header);
+			}
+
 			element.appendChild(info);
 		});
 	}
