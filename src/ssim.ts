@@ -6,107 +6,194 @@
  * ssim.ts - part of Image Quantization Library
  */
 
-// based on https://github.com/rhys-e/structural-similarity
-// http://en.wikipedia.org/wiki/Structural_similarity
-module IQ.Quality {
-	var K1 = 0.01,
-		K2 = 0.03;
+/**
+ * - Original TypeScript implementation:
+ *   https://github.com/igor-bezkrovny/image-quantization/blob/9f62764ac047c3e53accdf1d7e4e424b0ef2fb60/src/quality/ssim.ts
+ * - Based on Java implementation: https://github.com/rhys-e/structural-similarity
+ * - For more information see: http://en.wikipedia.org/wiki/Structural_similarity
+ */
+module SSIM {
+	'use strict';
 
-	var RED_COEFFICIENT   = 0.212655,
-		GREEN_COEFFICIENT = 0.715158,
-		BLUE_COEFFICIENT  = 0.072187;
+	export type Data = number[]|any[]|Uint8Array;
 
-	export class SSIM {
-		public compare(image1 : Utils.PointContainer, image2 : Utils.PointContainer) {
-			if (image1.getHeight() !== image2.getHeight() || image1.getWidth() !== image2.getWidth()) {
-				throw new Error("Images have different sizes!");
-			}
+	/**
+	 * Grey = 1, GreyAlpha = 2, RGB = 3, RGBAlpha = 4
+	 */
+	export enum Channels {
+		Grey = 1,
+		GreyAlpha = 2,
+		RGB = 3,
+		RGBAlpha = 4
+	}
 
-			var bitsPerComponent = 8,
-				L                = (1 << bitsPerComponent) - 1,
-				c1               = Math.pow((K1 * L), 2),
-				c2               = Math.pow((K2 * L), 2),
-				numWindows       = 0,
-				mssim            = 0.0;
+	export interface IImage {
+		data:Data;
+		width:number;
+		height:number;
+		channels:Channels;
+	}
 
-			//calculate ssim for each window
-			this._iterate(image1, image2, (lumaValues1 : number[], lumaValues2 : number[], averageLumaValue1 : number, averageLumaValue2 : number) => {
-				//calculate variance and covariance
-				var sigxy, sigsqx, sigsqy;
-				sigxy = sigsqx = sigsqy = 0.0;
-				for (var i = 0; i < lumaValues1.length; i++) {
-					sigsqx += Math.pow((lumaValues1[i] - averageLumaValue1), 2);
-					sigsqy += Math.pow((lumaValues2[i] - averageLumaValue2), 2);
-
-					sigxy += (lumaValues1[i] - averageLumaValue1) * (lumaValues2[i] - averageLumaValue2);
-				}
-
-				var numPixelsInWin = lumaValues1.length - 1;
-				sigsqx /= numPixelsInWin;
-				sigsqy /= numPixelsInWin;
-				sigxy /= numPixelsInWin;
-
-				//perform ssim calculation on window
-				var numerator   = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2),
-					denominator = (Math.pow(averageLumaValue1, 2) + Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2),
-					ssim        = numerator / denominator;
-
-				mssim += ssim;
-				numWindows++;
-
-			});
-			return mssim / numWindows;
+	/**
+	 * Entry point.
+	 * @throws new Error('Images have different sizes!')
+	 */
+	export function compare(image1:IImage,
+							image2:IImage,
+							windowSize:number = 8,
+							K1:number = 0.01,
+							K2:number = 0.03,
+							luminance:boolean = true,
+							bitsPerComponent:number = 8):number {
+		if (image1.width !== image2.width ||
+			image1.height !== image2.height) {
+			throw new Error('Images have different sizes!');
 		}
 
-		private _iterate(image1 : Utils.PointContainer, image2 : Utils.PointContainer, callback : (lumaValues1 : number[], lumaValues2 : number[], averageLumaValue1 : number, averageLumaValue2 : number) => void) {
-			var windowSize = 8,
-				width = image1.getWidth(),
-				height = image1.getHeight();
+		/* tslint:disable:no-bitwise */
+		var L:number = (1 << bitsPerComponent) - 1;
+		/* tslint:enable:no-bitwise */
 
-			for (var y = 0; y < height; y += windowSize) {
-				for (var x = 0; x < width; x += windowSize) {
+		var c1:number = Math.pow((K1 * L), 2),
+			c2:number = Math.pow((K2 * L), 2),
+			numWindows:number = 0,
+			mssim:number = 0.0;
+
+		function iteration(lumaValues1:number[],
+						   lumaValues2:number[],
+						   averageLumaValue1:number,
+						   averageLumaValue2:number):void {
+			// calculate variance and covariance
+			var sigxy:number,
+				sigsqx:number,
+				sigsqy:number;
+
+			sigxy = sigsqx = sigsqy = 0.0;
+
+			for (var i:number = 0; i < lumaValues1.length; i++) {
+				sigsqx += Math.pow((lumaValues1[i] - averageLumaValue1), 2);
+				sigsqy += Math.pow((lumaValues2[i] - averageLumaValue2), 2);
+				sigxy += (lumaValues1[i] - averageLumaValue1) * (lumaValues2[i] - averageLumaValue2);
+			}
+
+			var numPixelsInWin:number = lumaValues1.length - 1;
+			sigsqx /= numPixelsInWin;
+			sigsqy /= numPixelsInWin;
+			sigxy /= numPixelsInWin;
+
+			// perform ssim calculation on window
+			var numerator:number = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2),
+				denominator:number = (Math.pow(averageLumaValue1, 2) +
+					Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2);
+
+			mssim += numerator / denominator;
+			numWindows++;
+		}
+
+		// calculate SSIM for each window
+		Internals._iterate(image1, image2, windowSize, luminance, iteration);
+
+		return mssim / numWindows;
+	}
+
+	/**
+	 * Internal functions.
+	 */
+	module Internals {
+		export function _iterate(image1:IImage,
+								 image2:IImage,
+								 windowSize:number,
+								 luminance:boolean,
+								 callback:(lumaValues1:number[],
+										   lumaValues2:number[],
+										   averageLumaValue1:number,
+										   averageLumaValue2:number) => void):void {
+			var width:number = image1.width,
+				height:number = image1.height;
+
+			for (var y:number = 0; y < height; y += windowSize) {
+				for (var x:number = 0; x < width; x += windowSize) {
 					// avoid out-of-width/height
-					var windowWidth  = Math.min(windowSize, width - x),
-						windowHeight = Math.min(windowSize, height - y);
+					var windowWidth:number = Math.min(windowSize, width - x),
+						windowHeight:number = Math.min(windowSize, height - y);
 
-					var lumaValues1  = this._calculateLumaValuesForWindow(image1, x, y, windowWidth, windowHeight),
-						lumaValues2  = this._calculateLumaValuesForWindow(image2, x, y, windowWidth, windowHeight),
-						averageLuma1 = this._calculateAverageLuma(lumaValues1),
-						averageLuma2 = this._calculateAverageLuma(lumaValues2);
+					var lumaValues1:number[] = _lumaValuesForWindow(image1, x, y, windowWidth, windowHeight, luminance),
+						lumaValues2:number[] = _lumaValuesForWindow(image2, x, y, windowWidth, windowHeight, luminance),
+						averageLuma1:number = _averageLuma(lumaValues1),
+						averageLuma2:number = _averageLuma(lumaValues2);
 
 					callback(lumaValues1, lumaValues2, averageLuma1, averageLuma2);
 				}
 			}
 		}
 
-		private _calculateLumaValuesForWindow(image : Utils.PointContainer, x : number, y : number, width : number, height : number) : number[] {
-			var pointArray            = image.getPointArray(),
-				lumaValues : number[] = [],
-				counter               = 0;
+		function _lumaValuesForWindow(image:IImage,
+									  x:number,
+									  y:number,
+									  width:number,
+									  height:number,
+									  luminance:boolean):number[] {
+			var array:Data = image.data,
+				lumaValues:number[] = <any>new Float32Array(new ArrayBuffer(width * height * 4)),
+				counter:number = 0;
 
-			for (var j = y; j < y + height; j++) {
-				var offset = j * image.getWidth();
-				for (var i = x; i < x + width; i++) {
-					var point = pointArray[offset + i];
-					lumaValues[counter] = point.r * RED_COEFFICIENT + point.g * GREEN_COEFFICIENT + point.b * BLUE_COEFFICIENT;
-					counter++;
+			var maxj:number = y + height;
+
+			for (var j:number = y; j < maxj; j++) {
+				var offset:number = j * image.width;
+				var i:number = (offset + x) * image.channels;
+				var maxi:number = (offset + x + width) * image.channels;
+
+				switch (image.channels) {
+					case Channels.Grey:
+						while (i < maxi) {
+							// (0.212655 +  0.715158 + 0.072187) === 1
+							lumaValues[counter++] = array[i++];
+						}
+						break;
+					case Channels.GreyAlpha:
+						while (i < maxi) {
+							lumaValues[counter++] = array[i++] * (array[i++] / 255);
+						}
+						break;
+					case Channels.RGB:
+						if (luminance) {
+							while (i < maxi) {
+								lumaValues[counter++] = (array[i++] * 0.212655 + array[i++] * 0.715158 + array[i++] * 0.072187);
+							}
+						} else {
+							while (i < maxi) {
+								lumaValues[counter++] = (array[i++] + array[i++] + array[i++]);
+							}
+						}
+						break;
+					case Channels.RGBAlpha:
+						if (luminance) {
+							while (i < maxi) {
+								lumaValues[counter++] = (array[i++] * 0.212655 + array[i++] * 0.715158 + array[i++] * 0.072187) *
+									(array[i++] / 255);
+							}
+						} else {
+							while (i < maxi) {
+								lumaValues[counter++] = (array[i++] + array[i++] + array[i++]) *
+									(array[i++] / 255);
+							}
+						}
+						break;
 				}
 			}
 
 			return lumaValues;
 		}
 
-		private _calculateAverageLuma(lumaValues : number[]) : number {
-			var sumLuma = 0.0;
-			for (var i = 0; i < lumaValues.length; i++) {
+		function _averageLuma(lumaValues:number[]):number {
+			var sumLuma:number = 0.0;
+
+			for (var i:number = 0; i < lumaValues.length; i++) {
 				sumLuma += lumaValues[i];
 			}
 
 			return sumLuma / lumaValues.length;
 		}
-
-
-
 	}
 }
-
