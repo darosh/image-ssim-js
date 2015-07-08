@@ -15,6 +15,7 @@ Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser
 - http://www.cns.nyu.edu/lcv/ssim/ssim.m
 - http://www.researchgate.net/publication/270584309_Window_Size_Influence_on_SSIM_Fidelity
 - http://users.eecs.northwestern.edu/~pappas/papers/brooks_tip08.pdf
+- http://www.cns.nyu.edu/lcv/ssim/
 
 ## TypeScript documentation
 
