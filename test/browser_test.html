@@ -192,6 +192,7 @@
 
 	function processImagePair(pair, prepend) {
 		var element = document.createElement('div');
+		element.className = 'block';
 
 		if (prepend) {
 			root.insertBefore(element, root.children[1]);
@@ -217,8 +218,6 @@
 					'Luminance: ' + log.luminance + '<br>' +
 					'Elapsed time: ' + log.ellapsed + '<br>' +
 					'SSIM: <b>' + log.ssim + '</b>';
-
-			element.className = 'block';
 
 			element.appendChild(images[0].canvas);
 			element.appendChild(images[1].canvas);
