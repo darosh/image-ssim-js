@@ -8,7 +8,7 @@ Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser
 
 ## Demo
 
-[test/browser_test.html](http://darosh.github.io/ssim-js/test/browser_test.html) (RawGit CDN temporary link, bookmarking not recommended)
+[test/browser_test.html](http://darosh.github.io/ssim-js/test/browser_test.html)
 
 ## Similar stuff
 
