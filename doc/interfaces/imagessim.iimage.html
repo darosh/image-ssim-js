@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>SSIM</title>
+	<title>IImage | image-ssim</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">SSIM</a>
+					<a href="../index.html" class="title">image-ssim</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -57,130 +57,84 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="ssim.html">SSIM</a>
+					<a href="../modules/imagessim.html">ImageSSIM</a>
+				</li>
+				<li>
+					<a href="imagessim.iimage.html">IImage</a>
 				</li>
 			</ul>
-			<h1>Module SSIM</h1>
+			<h1>Interface IImage</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-comment">
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<ul>
-							<li>Original TypeScript implementation:
-							<a href="https://github.com/igor-bezkrovny/image-quantization/blob/9f62764ac047c3e53accdf1d7e4e424b0ef2fb60/src/quality/ssim.ts">https://github.com/igor-bezkrovny/image-quantization/blob/9f62764ac047c3e53accdf1d7e4e424b0ef2fb60/src/quality/ssim.ts</a></li>
-							<li>Based on Java implementation: <a href="https://github.com/rhys-e/structural-similarity">https://github.com/rhys-e/structural-similarity</a></li>
-							<li>For more information see: <a href="http://en.wikipedia.org/wiki/Structural_similarity">http://en.wikipedia.org/wiki/Structural_similarity</a></li>
-						</ul>
-					</div>
-				</div>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">IImage</span>
+					</li>
+				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Modules</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-module tsd-parent-kind-module tsd-is-not-exported"><a href="ssim.internals.html" class="tsd-kind-icon">Internals</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
-							<h3>Enumerations</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-enum tsd-parent-kind-module"><a href="../enums/ssim.channels.html" class="tsd-kind-icon">Channels</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Interfaces</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/ssim.iimage.html" class="tsd-kind-icon">IImage</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Type aliases</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-type-alias tsd-parent-kind-module"><a href="ssim.html#data" class="tsd-kind-icon">Data</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Functions</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ssim.html#compare" class="tsd-kind-icon">compare</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imagessim.iimage.html#channels" class="tsd-kind-icon">channels</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imagessim.iimage.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imagessim.iimage.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="imagessim.iimage.html#width" class="tsd-kind-icon">width</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Type aliases</h2>
-				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module">
-					<a name="data" class="tsd-anchor"></a>
-					<h3>Data</h3>
-					<div class="tsd-signature tsd-kind-icon">Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Uint8Array</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="channels" class="tsd-anchor"></a>
+					<h3>channels</h3>
+					<div class="tsd-signature tsd-kind-icon">channels<span class="tsd-signature-symbol">:</span> <a href="../enums/imagessim.channels.html" class="tsd-signature-type">Channels</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/darosh/ssim-js/blob/master/src/ssim.ts#L18">ssim.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L34">index.ts:34</a></li>
 						</ul>
 					</aside>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="compare" class="tsd-anchor"></a>
-					<h3>compare</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">compare<span class="tsd-signature-symbol">(</span>image1<span class="tsd-signature-symbol">: </span><a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a>, image2<span class="tsd-signature-symbol">: </span><a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a>, windowSize<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, K1<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, K2<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, luminance<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, bitsPerComponent<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/darosh/ssim-js/blob/master/src/ssim.ts#L41">ssim.ts:41</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Entry point.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>new Error(&#39;Images have different sizes!&#39;)</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>image1: <a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a></h5>
-								</li>
-								<li>
-									<h5>image2: <a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> windowSize: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;8</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> K1: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.01</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> K2: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0.03</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> luminance: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;true</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> bitsPerComponent: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;8</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
-						</li>
-					</ul>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <a href="../modules/imagessim.html#data" class="tsd-signature-type">Data</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L31">index.ts:31</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="height" class="tsd-anchor"></a>
+					<h3>height</h3>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L33">index.ts:33</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="width" class="tsd-anchor"></a>
+					<h3>width</h3>
+					<div class="tsd-signature tsd-kind-icon">width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L32">index.ts:32</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 		</div>
@@ -190,27 +144,48 @@
 					<li class="globals  ">
 						<a href="../index.html"><em>Globals</em></a>
 					</li>
-					<li class="current tsd-kind-module tsd-is-not-exported">
-						<a href="ssim.html">SSIM</a>
+					<li class="current tsd-kind-module">
+						<a href="../modules/imagessim.html">ImageSSIM</a>
 					</li>
-					<li class=" tsd-kind-module tsd-parent-kind-module tsd-is-not-exported">
-						<a href="ssim.internals.html">SSIM.<wbr>Internals</a>
+					<li class=" tsd-kind-module tsd-parent-kind-module">
+						<a href="../modules/imagessim.internals.html">ImageSSIM.<wbr>Internals</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-enum tsd-parent-kind-module">
-						<a href="../enums/ssim.channels.html" class="tsd-kind-icon">Channels</a>
+						<a href="../enums/imagessim.channels.html" class="tsd-kind-icon">Channels</a>
 					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
+						<a href="imagessim.iimage.html" class="tsd-kind-icon">IImage</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imagessim.iimage.html#channels" class="tsd-kind-icon">channels</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imagessim.iimage.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imagessim.iimage.html#height" class="tsd-kind-icon">height</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="imagessim.iimage.html#width" class="tsd-kind-icon">width</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/ssim.iimage.html" class="tsd-kind-icon">IImage</a>
+						<a href="imagessim.iresult.html" class="tsd-kind-icon">IResult</a>
 					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module">
-						<a href="ssim.html#data" class="tsd-kind-icon">Data</a>
+						<a href="../modules/imagessim.html#data" class="tsd-kind-icon">Data</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="ssim.html#compare" class="tsd-kind-icon">compare</a>
+						<a href="../modules/imagessim.html#compare" class="tsd-kind-icon">compare</a>
 					</li>
 				</ul>
 			</nav>

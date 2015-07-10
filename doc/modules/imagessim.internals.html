@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Internals | SSIM</title>
+	<title>Internals | image-ssim</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -23,7 +23,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">SSIM</a>
+					<a href="../index.html" class="title">image-ssim</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -57,10 +57,10 @@
 					<a href="../index.html">Globals</a>
 				</li>
 				<li>
-					<a href="ssim.html">SSIM</a>
+					<a href="imagessim.html">ImageSSIM</a>
 				</li>
 				<li>
-					<a href="ssim.internals.html">Internals</a>
+					<a href="imagessim.internals.html">Internals</a>
 				</li>
 			</ul>
 			<h1>Module Internals</h1>
@@ -84,9 +84,9 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="ssim.internals.html#_averageluma" class="tsd-kind-icon">_average<wbr>Luma</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="ssim.internals.html#_iterate" class="tsd-kind-icon">_iterate</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-module tsd-is-not-exported"><a href="ssim.internals.html#_lumavaluesforwindow" class="tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="imagessim.internals.html#_averageluma" class="tsd-kind-icon">_average<wbr>Luma</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="imagessim.internals.html#_iterate" class="tsd-kind-icon">_iterate</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="imagessim.internals.html#_lumavaluesforwindow" class="tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,17 +94,17 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="_averageluma" class="tsd-anchor"></a>
 					<h3>_average<wbr>Luma</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
 						<li class="tsd-signature tsd-kind-icon">_average<wbr>Luma<span class="tsd-signature-symbol">(</span>lumaValues<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/darosh/ssim-js/blob/master/src/ssim.ts#L189">ssim.ts:189</a></li>
+									<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L199">index.ts:199</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -121,22 +121,22 @@
 					<a name="_iterate" class="tsd-anchor"></a>
 					<h3>_iterate</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">_iterate<span class="tsd-signature-symbol">(</span>image1<span class="tsd-signature-symbol">: </span><a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a>, image2<span class="tsd-signature-symbol">: </span><a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a>, windowSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, luminance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">_iterate<span class="tsd-signature-symbol">(</span>image1<span class="tsd-signature-symbol">: </span><a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a>, image2<span class="tsd-signature-symbol">: </span><a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a>, windowSize<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, luminance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span>, callback<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/darosh/ssim-js/blob/master/src/ssim.ts#L103">ssim.ts:103</a></li>
+									<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L113">index.ts:113</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>image1: <a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a></h5>
+									<h5>image1: <a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a></h5>
 								</li>
 								<li>
-									<h5>image2: <a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a></h5>
+									<h5>image2: <a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a></h5>
 								</li>
 								<li>
 									<h5>windowSize: <span class="tsd-signature-type">number</span></h5>
@@ -148,7 +148,7 @@
 									<h5>callback: <span class="tsd-signature-type">function</span></h5>
 									<ul class="tsd-parameters">
 										<li class="tsd-parameter-siganture">
-											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+											<ul class="tsd-signatures tsd-kind-type-literal">
 												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>lumaValues1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span>, lumaValues2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span>, averageLumaValue1<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, averageLumaValue2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 											</ul>
 											<ul class="tsd-descriptions">
@@ -179,23 +179,23 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="_lumavaluesforwindow" class="tsd-anchor"></a>
 					<h3>_luma<wbr>Values<wbr>For<wbr>Window</h3>
-					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<li class="tsd-signature tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window<span class="tsd-signature-symbol">(</span>image<span class="tsd-signature-symbol">: </span><a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, luminance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window<span class="tsd-signature-symbol">(</span>image<span class="tsd-signature-symbol">: </span><a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a>, x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, width<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, height<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, luminance<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">[]</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/darosh/ssim-js/blob/master/src/ssim.ts#L130">ssim.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/darosh/image-ssim-js/blob/master/index.ts#L140">index.ts:140</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>image: <a href="../interfaces/ssim.iimage.html" class="tsd-signature-type">IImage</a></h5>
+									<h5>image: <a href="../interfaces/imagessim.iimage.html" class="tsd-signature-type">IImage</a></h5>
 								</li>
 								<li>
 									<h5>x: <span class="tsd-signature-type">number</span></h5>
@@ -225,24 +225,24 @@
 					<li class="globals  ">
 						<a href="../index.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module tsd-is-not-exported">
-						<a href="ssim.html">SSIM</a>
+					<li class=" tsd-kind-module">
+						<a href="imagessim.html">ImageSSIM</a>
 					</li>
-					<li class="current tsd-kind-module tsd-parent-kind-module tsd-is-not-exported">
-						<a href="ssim.internals.html">SSIM.<wbr>Internals</a>
+					<li class="current tsd-kind-module tsd-parent-kind-module">
+						<a href="imagessim.internals.html">ImageSSIM.<wbr>Internals</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="ssim.internals.html#_averageluma" class="tsd-kind-icon">_average<wbr>Luma</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="imagessim.internals.html#_averageluma" class="tsd-kind-icon">_average<wbr>Luma</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="ssim.internals.html#_iterate" class="tsd-kind-icon">_iterate</a>
+						<a href="imagessim.internals.html#_iterate" class="tsd-kind-icon">_iterate</a>
 					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module tsd-is-not-exported">
-						<a href="ssim.internals.html#_lumavaluesforwindow" class="tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window</a>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="imagessim.internals.html#_lumavaluesforwindow" class="tsd-kind-icon">_luma<wbr>Values<wbr>For<wbr>Window</a>
 					</li>
 				</ul>
 			</nav>
