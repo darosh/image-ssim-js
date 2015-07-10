@@ -1,13 +1,13 @@
 {
-  "name": "ssim",
-  "description": "Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser/server.",
-  "version": "0.1.0",
+  "name": "image-ssim",
+  "description": "Image structural similarity (SSIM). In TypeScript/JavaScript. For browser/server.",
+  "version": "0.2.0",
   "author": {
     "name": "Jan Forst",
     "email": "ensonador@gmail.com",
     "url": "https://github.com/darosh"
   },
-  "bugs": "https://github.com/darosh/ssim-js/issues",
+  "bugs": "https://github.com/darosh/image-ssim-js/issues",
   "dependencies": {},
   "devDependencies": {
     "browserify": "^10.2.4",
@@ -28,7 +28,7 @@
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
-  "homepage": "https://github.com/darosh/ssim-js/issues",
+  "homepage": "https://github.com/darosh/image-ssim-js/issues",
   "keywords": [
     "browser",
     "compare",
@@ -39,8 +39,8 @@
     "typescript"
   ],
   "license": "MIT",
-  "main": "dist/ssim.js",
-  "repository": "darosh/ssim-js",
+  "main": "index.js",
+  "repository": "darosh/image-ssim-js",
   "scripts": {
     "test": "mocha"
   }

@@ -1,6 +1,6 @@
-# SSIM [![Build Status](https://travis-ci.org/darosh/ssim-js.svg)](https://travis-ci.org/darosh/ssim-js)
+# Image SSIM [![Build Status](https://travis-ci.org/darosh/image-ssim-js.svg)](https://travis-ci.org/darosh/image-ssim-js)
 
-Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser/server.
+Image structural similarity (SSIM). In TypeScript/JavaScript. For browser/server.
 
 - Original TypeScript implementation: https://github.com/igor-bezkrovny/image-quantization/blob/9f62764ac047c3e53accdf1d7e4e424b0ef2fb60/src/quality/ssim.ts
 - Based on Java implementation: https://github.com/rhys-e/structural-similarity
@@ -8,7 +8,7 @@ Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser
 
 ## Demo
 
-[test/browser_test.html](http://darosh.github.io/ssim-js/test/browser_test.html)
+[test/browser_test.html](http://darosh.github.io/image-ssim-js/test/browser_test.html)
 
 ## Similar stuff
 
@@ -19,6 +19,6 @@ Structural Similarity Image Metric (SSIM). In TypeScript/JavaScript. For browser
 - https://gist.github.com/Bibimaw/8873663
 - https://github.com/bytespider/ssim
 
-## TypeScript documentation
+## Documentation
 
-[http://darosh.github.io/ssim-js/doc/](http://darosh.github.io/ssim-js/doc/)
+[http://darosh.github.io/image-ssim-js/doc/](http://darosh.github.io/image-ssim-js/doc/)

@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.SSIM = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ImageSSIM = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * @preserve
  * Copyright 2015 Igor Bezkrovny
@@ -12,8 +12,8 @@
  * - Based on Java implementation: https://github.com/rhys-e/structural-similarity
  * - For more information see: http://en.wikipedia.org/wiki/Structural_similarity
  */
-var SSIM;
-(function (SSIM) {
+var ImageSSIM;
+(function (ImageSSIM) {
     'use strict';
     /**
      * Grey = 1, GreyAlpha = 2, RGB = 3, RGBAlpha = 4
@@ -23,8 +23,8 @@ var SSIM;
         Channels[Channels["GreyAlpha"] = 2] = "GreyAlpha";
         Channels[Channels["RGB"] = 3] = "RGB";
         Channels[Channels["RGBAlpha"] = 4] = "RGBAlpha";
-    })(SSIM.Channels || (SSIM.Channels = {}));
-    var Channels = SSIM.Channels;
+    })(ImageSSIM.Channels || (ImageSSIM.Channels = {}));
+    var Channels = ImageSSIM.Channels;
     /**
      * Entry point.
      * @throws new Error('Images have different sizes!')
@@ -42,6 +42,7 @@ var SSIM;
         var L = (1 << bitsPerComponent) - 1;
         /* tslint:enable:no-bitwise */
         var c1 = Math.pow((K1 * L), 2), c2 = Math.pow((K2 * L), 2), numWindows = 0, mssim = 0.0;
+        var mcs = 0.0;
         function iteration(lumaValues1, lumaValues2, averageLumaValue1, averageLumaValue2) {
             // calculate variance and covariance
             var sigxy, sigsqx, sigsqy;
@@ -56,15 +57,17 @@ var SSIM;
             sigsqy /= numPixelsInWin;
             sigxy /= numPixelsInWin;
             // perform ssim calculation on window
-            var numerator = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2), denominator = (Math.pow(averageLumaValue1, 2) + Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2);
+            var numerator = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2);
+            var denominator = (Math.pow(averageLumaValue1, 2) + Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2);
             mssim += numerator / denominator;
+            mcs += (2 * sigxy + c2) / (sigsqx + sigsqy + c2);
             numWindows++;
         }
         // calculate SSIM for each window
         Internals._iterate(image1, image2, windowSize, luminance, iteration);
-        return mssim / numWindows;
+        return { ssim: mssim / numWindows, mcs: mcs / numWindows };
     }
-    SSIM.compare = compare;
+    ImageSSIM.compare = compare;
     /**
      * Internal functions.
      */
@@ -137,10 +140,8 @@ var SSIM;
             return sumLuma / lumaValues.length;
         }
     })(Internals || (Internals = {}));
-})(SSIM || (SSIM = {}));
-/// <reference path="../typings/tsd.d.ts" />
-/// <reference path="ssim.ts" />
-module.exports = SSIM;
+})(ImageSSIM || (ImageSSIM = {}));
+module.exports = ImageSSIM;
 
 },{}]},{},[1])(1)
 });

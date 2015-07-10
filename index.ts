@@ -12,7 +12,7 @@
  * - Based on Java implementation: https://github.com/rhys-e/structural-similarity
  * - For more information see: http://en.wikipedia.org/wiki/Structural_similarity
  */
-module SSIM {
+module ImageSSIM {
 	'use strict';
 
 	export type Data = number[]|any[]|Uint8Array;
@@ -34,6 +34,11 @@ module SSIM {
 		channels:Channels;
 	}
 
+	export  interface IResult {
+		ssim:number;
+		mcs:number;
+	}
+
 	/**
 	 * Entry point.
 	 * @throws new Error('Images have different sizes!')
@@ -44,7 +49,7 @@ module SSIM {
 							K1:number = 0.01,
 							K2:number = 0.03,
 							luminance:boolean = true,
-							bitsPerComponent:number = 8):number {
+							bitsPerComponent:number = 8):IResult {
 		if (image1.width !== image2.width ||
 			image1.height !== image2.height) {
 			throw new Error('Images have different sizes!');
@@ -58,6 +63,8 @@ module SSIM {
 			c2:number = Math.pow((K2 * L), 2),
 			numWindows:number = 0,
 			mssim:number = 0.0;
+
+		var mcs:number = 0.0;
 
 		function iteration(lumaValues1:number[],
 						   lumaValues2:number[],
@@ -82,18 +89,21 @@ module SSIM {
 			sigxy /= numPixelsInWin;
 
 			// perform ssim calculation on window
-			var numerator:number = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2),
-				denominator:number = (Math.pow(averageLumaValue1, 2) +
-					Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2);
+			var numerator:number = (2 * averageLumaValue1 * averageLumaValue2 + c1) * (2 * sigxy + c2);
+
+			var denominator:number = (Math.pow(averageLumaValue1, 2) +
+				Math.pow(averageLumaValue2, 2) + c1) * (sigsqx + sigsqy + c2);
 
 			mssim += numerator / denominator;
+			mcs += (2 * sigxy + c2) / (sigsqx + sigsqy + c2);
+
 			numWindows++;
 		}
 
 		// calculate SSIM for each window
 		Internals._iterate(image1, image2, windowSize, luminance, iteration);
 
-		return mssim / numWindows;
+		return {ssim: mssim / numWindows, mcs: mcs / numWindows};
 	}
 
 	/**
@@ -197,3 +207,5 @@ module SSIM {
 		}
 	}
 }
+
+export = ImageSSIM;

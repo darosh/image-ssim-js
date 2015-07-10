@@ -1,4 +1,3 @@
-/// <reference path="typings/tsd.d.ts" />
 /**
  * @preserve
  * Copyright 2015 Igor Bezkrovny
@@ -12,7 +11,7 @@
  * - Based on Java implementation: https://github.com/rhys-e/structural-similarity
  * - For more information see: http://en.wikipedia.org/wiki/Structural_similarity
  */
-declare module SSIM {
+declare module ImageSSIM {
     type Data = number[] | any[] | Uint8Array;
     /**
      * Grey = 1, GreyAlpha = 2, RGB = 3, RGBAlpha = 4
@@ -29,9 +28,14 @@ declare module SSIM {
         height: number;
         channels: Channels;
     }
+    interface IResult {
+        ssim: number;
+        mcs: number;
+    }
     /**
      * Entry point.
      * @throws new Error('Images have different sizes!')
      */
-    function compare(image1: IImage, image2: IImage, windowSize?: number, K1?: number, K2?: number, luminance?: boolean, bitsPerComponent?: number): number;
+    function compare(image1: IImage, image2: IImage, windowSize?: number, K1?: number, K2?: number, luminance?: boolean, bitsPerComponent?: number): IResult;
 }
+export = ImageSSIM;

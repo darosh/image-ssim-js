@@ -118,8 +118,8 @@
 </head>
 <body>
 
-<h1 class="left">SSIM
-	<small>— Structural Similarity Image Metric</small>
+<h1 class="left">Image SSIM
+	<small>— Image structural similarity</small>
 </h1>
 
 <div class="right"><a href="https://github.com/darosh/ssim-js">GitHub</a>
@@ -135,7 +135,7 @@
 	</div>
 </div>
 
-<script src="../dist/ssim.min.js"></script>
+<script src="../dist/image-ssim.js"></script>
 
 <script>
 	var width, height;
@@ -214,8 +214,9 @@
 			log.windowSize = pair[2];
 			log.luminance = pair[3];
 			var start = new Date().getTime();
-			log.ssim = SSIM.compare(images[0], images[1], pair[2], 0.01, 0.03, pair[3]);
-			log.ssim = Math.round(log.ssim * 1000) / 1000;
+			var res = ImageSSIM.compare(images[0], images[1], pair[2], 0.01, 0.03, pair[3])
+			log.ssim = Math.round(res.ssim * 1000) / 1000;
+			// log.mcs = Math.round(res.mcs * 1000) / 1000;
 			log.ellapsed = new Date().getTime() - start + 'ms';
 
 			// log.size = images[0].width + 'x' + images[0].height;
