@@ -69,6 +69,7 @@
 			display: block;
 			border: 1px solid rgba(0, 0, 0, .12);
 			margin-bottom: 20px;
+			width: 100%;
 		}
 
 		.clear {
@@ -173,10 +174,10 @@
 		var img = new Image();
 		img.onload = function () {
 			var canvas = document.createElement('canvas');
-			canvas.width = width;
-			canvas.height = height;
+			canvas.width = img.width;
+			canvas.height = img.height;
 			var ctx = canvas.getContext('2d');
-			ctx.drawImage(img, 0, 0, width, canvas.height);
+			ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 			var id = ctx.getImageData(0, 0, canvas.width, canvas.height);
 			done({width: canvas.width, height: canvas.height, data: id.data, channels: 4, canvas: canvas}, index);
 		};
