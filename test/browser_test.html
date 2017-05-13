@@ -215,7 +215,12 @@
 			log.windowSize = pair[2];
 			log.luminance = pair[3];
 			var start = new Date().getTime();
-			var res = ImageSSIM.compare(images[0], images[1], pair[2], 0.01, 0.03, pair[3])
+			var res;
+			try {
+				res = ImageSSIM.compare(images[0], images[1], pair[2], 0.01, 0.03, pair[3])
+			} catch (e) {
+				alert(e);
+			}
 			log.ssim = Math.round(res.ssim * 1000) / 1000;
 			// log.mcs = Math.round(res.mcs * 1000) / 1000;
 			log.ellapsed = new Date().getTime() - start + 'ms';
